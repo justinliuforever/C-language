@@ -1,0 +1,30 @@
+Dump of assembler code for function phase_4:
+=> 0x0000555555555cca <+0>:	sub    $0x18,%rsp
+   0x0000555555555cce <+4>:	mov    %fs:0x28,%rax
+   0x0000555555555cd7 <+13>:	mov    %rax,0x8(%rsp)
+   0x0000555555555cdc <+18>:	xor    %eax,%eax
+   0x0000555555555cde <+20>:	mov    %rsp,%rcx
+   0x0000555555555ce1 <+23>:	lea    0x4(%rsp),%rdx
+   0x0000555555555ce6 <+28>:	lea    0x1960(%rip),%rsi        # 0x55555555764d
+   0x0000555555555ced <+35>:	callq  0x555555555830 <__isoc99_sscanf@plt>
+   0x0000555555555cf2 <+40>:	cmp    $0x2,%eax
+   0x0000555555555cf5 <+43>:	jne    0x555555555d02 <phase_4+56>
+   0x0000555555555cf7 <+45>:	mov    (%rsp),%eax
+   0x0000555555555cfa <+48>:	sub    $0x2,%eax
+   0x0000555555555cfd <+51>:	cmp    $0x2,%eax
+   0x0000555555555d00 <+54>:	jbe    0x555555555d07 <phase_4+61>
+   0x0000555555555d02 <+56>:	callq  0x555555556343 <explode_bomb>
+   0x0000555555555d07 <+61>:	mov    (%rsp),%esi
+   0x0000555555555d0a <+64>:	mov    $0x9,%edi
+   0x0000555555555d0f <+69>:	callq  0x555555555c91 <func4>
+   0x0000555555555d14 <+74>:	cmp    %eax,0x4(%rsp)
+   0x0000555555555d18 <+78>:	je     0x555555555d1f <phase_4+85>
+   0x0000555555555d1a <+80>:	callq  0x555555556343 <explode_bomb>
+---Type <return> to continue, or q <return> to quit---
+   0x0000555555555d1f <+85>:	mov    0x8(%rsp),%rax
+   0x0000555555555d24 <+90>:	xor    %fs:0x28,%rax
+   0x0000555555555d2d <+99>:	jne    0x555555555d34 <phase_4+106>
+   0x0000555555555d2f <+101>:	add    $0x18,%rsp
+   0x0000555555555d33 <+105>:	retq   
+   0x0000555555555d34 <+106>:	callq  0x555555555790 <__stack_chk_fail@plt>
+End of assembler dump

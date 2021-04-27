@@ -1,0 +1,321 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+int n, m;
+int ax = 0, bx = 0, cx = 0, dx = 0;
+//int *ax1=&ax, *bx1=&bx, *cx1=&cx, *dx1=&dx;
+char a[101][20];
+
+#define N 20
+int ter[101][5]={0};
+
+void  move (int *x, int *y){
+    *y = *x;
+}
+
+int add (int *x, int *y){
+    *y = *x+*y;
+    return 0;
+}
+
+int sub (int *x, int *y){
+    *y = *y-*x;
+    return 0;
+}
+
+int mul (int *x, int *y){
+     *y = (*x)*(*y);
+    printf("here %d\n", *x);
+    return 0;
+}
+
+int divi (int *x, int *y){
+     *y = (*x)/(*y);
+    return 0;
+}
+
+
+void  jmp (int *x){
+    n = *x;
+}
+
+void  je (int x, int y, int z){
+    if (y == z){
+        n = x;
+    }
+}
+
+void  jne (int x, int y, int z){
+    if (y != z){
+        n = x;
+    }
+}
+
+void  jg (int x, int y, int z){
+    if (y > z){
+        n = x;
+    }
+}
+
+void  jge (int x, int y, int z){
+    if (y >= z){
+        n = x;
+    }
+}
+
+void  jl (int x, int y, int z){
+    if (y < z){
+        n = x;
+    }
+}
+void  jle (int x, int y, int z){
+    if (y <= z){
+        n = x;
+    }
+}
+
+void  read (int *a){
+    scanf("%d", a);
+}
+
+void print (int a){
+    printf("%d", a);
+}
+
+
+int distinguish(int r,int q,int p)//q is row ,p is the location of argument,r is the beginning of the argument.
+{
+    if(('0'<= a[q][r]) && (a[q][r]<='9'))
+    {
+       // printf("enter the 123\n");
+       // printf("%d\n",a[q][r]);
+        int tem=0;
+        int temp[10];
+        while (('0'<= a[q][r])&&(a[q][r]<='9')){
+            //printf("enter the while\n");
+            temp[tem]=a[q][r]-'0';
+           //printf("temp shuzu is %d\n",temp[tem]);
+            tem++;
+            r++;
+        }
+        //printf("term is %d\n",tem);
+        tem = tem-1;
+         for(int temp1=0;temp1<=(tem);temp1++){
+            // printf("tem is %d\n",tem);
+            // printf("ter is %d\n",ter[q][p]);
+         ter[q][p]=ter[q][p] + temp[temp1]*(int)pow(10, tem-temp1);//tem-temp1
+             //printf("p is %d\n", p);
+             //printf("q is %d",q);
+            // printf("ter is %d\n",ter[q][p]);
+    }
+        //printf("right  now tem is  %d\n",tem);
+        return tem+2;
+    }
+    else if(('a'<= a[q][r])&&(a[q][r] <='d'))
+    {
+        //printf("enter the abc\n");
+       switch (a[q][r])
+       {
+           case 'a':
+               ter[q][p]=&ax;
+               //ter[q][p]=ax1;
+               break;
+           case 'b':
+               ter[q][p]=&bx;
+               //ter[q][p]=bx1;
+               break;
+           case 'c':
+               ter[q][p]=&cx;
+               //ter[q][p]=cx1;
+               break;
+           case 'd':
+               ter[q][p]=&dx;
+              // ter[q][p]=dx1;
+               break;
+       }
+        return 3;
+    }
+}
+
+
+void distri(char a[101][20]){
+    for (int q=0; q <101; q++){
+        switch (a[q][1]){
+            case 'o':
+                ter[q][0] = 1;
+                distinguish((distinguish(4, q, 1)+ 4), q, 2);
+                break;
+            case 'd':
+                ter[q][0] = 2;
+                distinguish(distinguish(4, q, 1)+4, q, 2);
+                break;
+            case 'u':
+                if(a[q][2] == 'b'){
+                ter[q][0] = 3;
+                distinguish(distinguish(4, q, 1)+4, q, 2);
+                break;
+                }
+                else{
+                    ter[q][0] = 4;
+                    distinguish(distinguish(4, q, 1)+4, q, 2);
+                   // int f = distinguish(4, q, 1)+4;
+                   // printf("the f is : %d \n", f);
+                   // distinguish(f, q, 2);
+                    break;
+                }
+            case'i':
+                ter[q][0] = 5;
+                distinguish(distinguish(4, q, 1)+4, q, 2);
+                break;
+            case 'm':
+                ter[q][0] = 6;
+                distinguish(4, q, 1);
+                break;
+           
+            case 'e':
+                if (a[q][2] == 'a'){
+                ter[q][0] = 13;
+                   // printf("%d\n",ter[q][0]);
+                distinguish(5, q, 1);
+                   // printf("%d\n",ter[q][1]);
+                    //printf("%d\n",q);
+                    
+                break;
+                }else{
+                    ter[q][0] = 7;
+                   // distinguish(distinguish(distinguish(3, q, 1), q, 2), q, 3);
+                    int f =distinguish(3, q, 1)+3;
+                    f = f + distinguish(f, q, 2);
+                    distinguish(f, q, 3);
+                    break;
+                }
+            case 'n':
+                ter[q][0] = 8;
+                //distinguish(distinguish(distinguish(4, q, 1), q, 2), q, 3);
+                int f =distinguish(4, q, 1) + 4;
+                f = f + distinguish(f, q, 2);
+                distinguish(f, q, 3);
+                break;
+            case 'g':
+                if (a[q][2] == 'e'){
+                    ter[q][0] = 10;
+                    //distinguish(distinguish(distinguish(4, q, 1), q, 2), q, 3);
+                    int f = 4 + distinguish(4, q, 1);
+                    f = f + distinguish(f, q, 2);
+                    distinguish(f, q, 3);
+                    break;
+                }else{
+                    ter[q][0] = 9;
+                    //distinguish(distinguish(distinguish(3, q, 1), q, 2), q, 3);
+                    int f = 3 + distinguish(3, q, 1);
+                    f = f + distinguish(f, q, 2);
+                    distinguish(f, q, 3);
+                    break;
+                }
+            case 'l':
+                if (a[q][2] == 'e'){
+                    ter[q][0] = 12;
+                    //distinguish(distinguish(distinguish(4, q, 1), q, 2), q, 3);
+                    int f = 4 + distinguish(4, q, 1);
+                    f = f + distinguish(f, q, 2);
+                    distinguish(f, q, 3);
+                    break;
+                }else{
+                    ter[q][0] = 11;
+                    //distinguish(distinguish(distinguish(3, q, 1), q, 2), q, 3);
+                    int f = 3 + distinguish(3, q, 1);
+                    f = f + distinguish(f, q, 2);
+                    distinguish(f, q, 3);
+                    break;
+                case 'r':
+                    ter[q][0] = 14;
+                    distinguish(6, q, 1);
+                    break;
+        }
+    }
+    
+}
+}
+
+
+int main(int argc, char* argv[])
+{
+    FILE *fp;
+    fp = fopen(argv[1], "r");
+    
+    if(fp == NULL){
+        printf("error\n");
+        exit(2);
+    }
+    
+    //char *name[100][4];
+  //  char *line[101];
+    char tstr[20];
+
+    
+    //int value1 [100], value2 [100], value3 [100];
+    //int  a, b, c;
+    //, a[6], b[6], c[6];
+    
+    int i=0;
+    
+    
+    while(fgets(a[i], N, fp) != NULL){
+       //strin[i]= tstr;
+        printf("%s", a[i]);
+        i++;
+    }
+   
+   distri(a);
+    /*if (a[0][2] == 'a'){
+    ter[0][0] = 13;
+    printf("%c",a[0][1]);
+    printf("%d", ter[0][0]);
+    distinguish(5, 0, 1);
+    printf("%d\n", ter[0][0]);
+    printf("%d\n", ter[0][1]);
+   /* }else{
+        a[0][0] = 7;
+        distinguish(distinguish(distinguish(3, 0, 1), 0, 2), 0, 3);
+    }
+    //for(int x1 = 0; x1<101; x1++)
+    //printf("%s", ter[x1]);
+    printf("exit the program\n");
+    */
+    for(int x1 = 0; x1<101; x1++){
+        for(int x2 = 0; x2<5; x2++)
+            printf("%d ", ter[x1][x2]);
+        printf("\n");
+    }
+    printf("****************************\n");
+    
+    for(int x1 = 0; x1<101; x1++){
+        int fct = ter[x1][0];
+        
+        switch (fct) {
+            case 13:
+                //printf("enter read/n");
+                //read(&ter[x1][1]);
+                scanf("%d", &ter[x1][1]);
+               printf("read number is %d\n",ter[x1][1] );
+                break;
+            case 4:
+                printf("row0 ax is %d\n",ter[0][1]);
+                printf("row1 ax is %d\n",ter[x1][2]);
+                mul(&ter[x1][1], &ter[x1][2]);
+                printf("%d",ter[x1][2]);
+                break;
+                
+          
+        }
+        
+        /*
+        if (fct == 13) {
+            read(&ter[x1][1]);
+            printf("enter read/n");
+        }
+        */
+    }
+    
+}

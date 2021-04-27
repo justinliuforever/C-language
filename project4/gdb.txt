@@ -1,0 +1,42 @@
+b name (set break point)
+disas (show the code for the part which set the break point)
+info registers(查看寄存器)
+i r(看函数)
+x/d ......(看值)
+x/s ... =>"..."
+si (step in)
+
+Dump of assembler code for function phase_2:
+=> 0x0000555555555b74 <+0>:	push   %rbp
+   0x0000555555555b75 <+1>:	push   %rbx
+   0x0000555555555b76 <+2>:	sub    $0x28,%rsp
+   0x0000555555555b7a <+6>:	mov    %fs:0x28,%rax
+   0x0000555555555b83 <+15>:	mov    %rax,0x18(%rsp)
+   0x0000555555555b88 <+20>:	xor    %eax,%eax
+   0x0000555555555b8a <+22>:	mov    %rsp,%rsi
+   0x0000555555555b8d <+25>:	callq  0x55555555638f <read_six_numbers>
+   0x0000555555555b92 <+30>:	cmpl   $0x0,(%rsp)
+   0x0000555555555b96 <+34>:	jne    0x555555555b9f <phase_2+43>
+   0x0000555555555b98 <+36>:	cmpl   $0x1,0x4(%rsp)
+   0x0000555555555b9d <+41>:	je     0x555555555ba4 <phase_2+48>
+   0x0000555555555b9f <+43>:	callq  0x555555556353 <explode_bomb>
+   0x0000555555555ba4 <+48>:	mov    %rsp,%rbx
+   0x0000555555555ba7 <+51>:	lea    0x10(%rbx),%rbp
+   0x0000555555555bab <+55>:	jmp    0x555555555bb6 <phase_2+66>
+   0x0000555555555bad <+57>:	add    $0x4,%rbx
+   0x0000555555555bb1 <+61>:	cmp    %rbp,%rbx
+   0x0000555555555bb4 <+64>:	je     0x555555555bc7 <phase_2+83>
+   0x0000555555555bb6 <+66>:	mov    0x4(%rbx),%eax
+   0x0000555555555bb9 <+69>:	add    (%rbx),%eax
+   0x0000555555555bbb <+71>:	cmp    %eax,0x8(%rbx)≠
+   0x0000555555555bbe <+74>:	je     0x555555555bad <phase_2+57>
+   0x0000555555555bc0 <+76>:	callq  0x555555556353 <explode_bomb>
+   0x0000555555555bc5 <+81>:	jmp    0x555555555bad <phase_2+57>
+   0x0000555555555bc7 <+83>:	mov    0x18(%rsp),%rax
+   0x0000555555555bcc <+88>:	xor    %fs:0x28,%rax
+   0x0000555555555bd5 <+97>:	jne    0x555555555bde <phase_2+106>
+   0x0000555555555bd7 <+99>:	add    $0x28,%rsp
+   0x0000555555555bdb <+103>:	pop    %rbx
+   0x0000555555555bdc <+104>:	pop    %rbp
+   0x0000555555555bdd <+105>:	retq   
+   0x0000555555555bde <+106>:	callq  0x555555555790 <__stack_chk_fail@plt>≠

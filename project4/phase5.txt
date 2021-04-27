@@ -1,0 +1,36 @@
+Dump of assembler code for function phase_5:
+=> 0x0000555555555d39 <+0>:	push   %rbx
+   0x0000555555555d3a <+1>:	sub    $0x10,%rsp
+   0x0000555555555d3e <+5>:	mov    %rdi,%rbx
+   0x0000555555555d41 <+8>:	mov    %fs:0x28,%rax
+   0x0000555555555d4a <+17>:	mov    %rax,0x8(%rsp)
+   0x0000555555555d4f <+22>:	xor    %eax,%eax
+   0x0000555555555d51 <+24>:	callq  0x555555556022 <string_length>
+   0x0000555555555d56 <+29>:	cmp    $0x6,%eax
+   0x0000555555555d59 <+32>:	jne    0x555555555db0 <phase_5+119>
+   0x0000555555555d5b <+34>:	mov    $0x0,%eax
+   0x0000555555555d60 <+39>:	lea    0x1689(%rip),%rcx        # 0x5555555573f0 <array.3415>
+   0x0000555555555d67 <+46>:	movzbl (%rbx,%rax,1),%edx
+   0x0000555555555d6b <+50>:	and    $0xf,%edx
+   0x0000555555555d6e <+53>:	movzbl (%rcx,%rdx,1),%edx
+   0x0000555555555d72 <+57>:	mov    %dl,0x1(%rsp,%rax,1)
+   0x0000555555555d76 <+61>:	add    $0x1,%rax
+   0x0000555555555d7a <+65>:	cmp    $0x6,%rax
+   0x0000555555555d7e <+69>:	jne    0x555555555d67 <phase_5+46>
+   0x0000555555555d80 <+71>:	movb   $0x0,0x7(%rsp)
+   0x0000555555555d85 <+76>:	lea    0x1(%rsp),%rdi
+   0x0000555555555d8a <+81>:	lea    0x1635(%rip),%rsi        # 0x5555555573c6
+   0x0000555555555d91 <+88>:	callq  0x55555555603f <strings_not_equal>
+   0x0000555555555d96 <+93>:	test   %eax,%eax
+   0x0000555555555d98 <+95>:	jne    0x555555555db7 <phase_5+126>
+   0x0000555555555d9a <+97>:	mov    0x8(%rsp),%rax
+   0x0000555555555d9f <+102>:	xor    %fs:0x28,%rax
+   0x0000555555555da8 <+111>:	jne    0x555555555dbe <phase_5+133>
+   0x0000555555555daa <+113>:	add    $0x10,%rsp
+   0x0000555555555dae <+117>:	pop    %rbx
+   0x0000555555555daf <+118>:	retq   
+   0x0000555555555db0 <+119>:	callq  0x555555556343 <explode_bomb>
+   0x0000555555555db5 <+124>:	jmp    0x555555555d5b <phase_5+34>
+   0x0000555555555db7 <+126>:	callq  0x555555556343 <explode_bomb>
+   0x0000555555555dbc <+131>:	jmp    0x555555555d9a <phase_5+97>
+   0x0000555555555dbe <+133>:	callq  0x555555555790 <__stack_chk_fail@plt>
